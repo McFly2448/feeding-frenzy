@@ -1,0 +1,76 @@
+body {
+    margin: 0;
+    background: #222;
+    color: #fff;
+    font-family: sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#game-board {
+    display: grid;
+    grid-template-columns: repeat(9, 60px);
+    grid-auto-rows: 60px;
+    gap: 4px;
+    margin-top: 20px;
+}
+
+.tile {
+    width: 60px;
+    height: 60px;
+    background: #444;
+    border: 2px solid #666;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    cursor: pointer;
+    position: relative;
+}
+
+.tile.covered::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 1;
+}
+
+#inventory {
+    margin-top: 30px;
+    display: flex;
+    gap: 10px;
+}
+
+.slot {
+    width: 60px;
+    height: 60px;
+    border: 2px solid #fff;
+    background: #111;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+}
+
+#message {
+    margin-top: 20px;
+    font-size: 20px;
+    color: red;
+}
+
+#controls {
+    margin-top: 20px;
+    display: flex;
+    gap: 10px;
+}
+
+#controls button {
+    font-size: 16px;
+    padding: 6px 12px;
+    cursor: pointer;
+}
