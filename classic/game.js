@@ -224,4 +224,10 @@ function updateButtons() {
     gameOver || usedShuffles >= maxShuffles;
 }
 
+function toggleZoom() {
+  document.body.classList.toggle("zoomed");
+  const btn = document.getElementById("zoom-button");
+  btn.textContent = document.body.classList.contains("zoomed") ? "🔎 Zoom Out" : "🔍 Zoom In";
+}
+
 initGame();

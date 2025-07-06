@@ -71,3 +71,28 @@ body {
     font-size: 16px;
     color: #ccc;
 }
+
+body.zoomed .tile {
+    width: 80px;
+    height: 80px;
+    font-size: 44px;
+}
+
+body.zoomed .slot {
+    width: 80px;
+    height: 80px;
+    font-size: 44px;
+}
+
+body.zoomed #topdown-board {
+    width: 1200px;
+    height: 1200px;
+}
+
+body.zoomed button {
+    font-size: 18px;
+}
+
+body.zoomed #message {
+    font-size: 20px;
+}

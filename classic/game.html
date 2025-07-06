@@ -15,6 +15,7 @@
         <button onclick="initGame()">🔄 Restart</button>
         <button onclick="undoMove()">↩️ Undo (<span id='undo-count'>3</span> left)</button>
         <button onclick="shuffleBoard()">🔀 Shuffle (<span id='shuffle-count'>2</span> left)</button>
+        <button onclick="toggleZoom()" id="zoom-button">🔍 Zoom In</button>
     </div>
 
     <div id="game-board"></div>
@@ -22,7 +23,7 @@
     <div id="message"></div>
 
     <a href="../index.html" class="button">← Back to Start</a>
-    <div id="version">v1.1.0</div>
+    <div id="version">v1.1.1</div>
 
     <script src="game.js"></script>
 </body>

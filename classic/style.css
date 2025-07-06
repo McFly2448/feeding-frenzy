@@ -62,3 +62,28 @@
     gap: 10px;
     margin-bottom: 10px;
 }
+
+body.zoomed #game-board {
+    grid-template-columns: repeat(9, 80px);
+    grid-auto-rows: 80px;
+}
+
+body.zoomed .tile {
+    width: 80px;
+    height: 80px;
+    font-size: 36px;
+}
+
+body.zoomed .slot {
+    width: 80px;
+    height: 80px;
+    font-size: 36px;
+}
+
+body.zoomed button {
+    font-size: 18px;
+}
+
+body.zoomed #message {
+    font-size: 20px;
+}

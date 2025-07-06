@@ -6,11 +6,11 @@ const shuffleCountEl = document.getElementById("shuffle-count");
 const undoButton = document.getElementById("undo-button");
 const shuffleButton = document.getElementById("shuffle-button");
 
-const TILE_SIZE = 60;
 const OFFSET_X = 4;
 const OFFSET_Y = 5;
 const SYMBOLS = ['🍎', '🍌', '🍇', '🍓', '🥝', '🍍', '🥑', '🍒', '🍉', '🍅', '🥕', '🌽', '🥦', '🍠', '🥜'];
 
+let tileSize = 60;
 let allTiles = [];
 let inventorySlots = [];
 let undoStack = [];
@@ -120,8 +120,8 @@ function renderBoard() {
 
         const div = document.createElement("div");
         div.className = "tile";
-        div.style.left = `${tile.x * TILE_SIZE + tile.z * 4}px`;
-        div.style.top = `${tile.y * TILE_SIZE - tile.z * 4}px`;
+        div.style.left = `${tile.x * tileSize + tile.z * 4}px`;
+        div.style.top = `${tile.y * tileSize - tile.z * 4}px`;
         div.style.zIndex = 100 + tile.z;
         div.textContent = tile.symbol;
 
@@ -243,6 +243,18 @@ function shuffleBoard() {
 
 function updateShuffleButtonState() {
     shuffleButton.disabled = shuffleCount <= 0;
+}
+
+function toggleZoom() {
+    document.body.classList.toggle("zoomed");
+
+    const zoomed = document.body.classList.contains("zoomed");
+    tileSize = zoomed ? 80 : 60;
+
+    const btn = document.getElementById("zoom-button");
+    btn.textContent = zoomed ? "🔎 Zoom Out" : "🔍 Zoom In";
+
+    renderAll();
 }
 
 function renderAll() {
