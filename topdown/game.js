@@ -257,6 +257,36 @@ function toggleZoom() {
     renderAll();
 }
 
+function toggleZoom() {
+    const zoomed = document.body.classList.toggle("zoomed");
+    localStorage.setItem("zoom", zoomed ? "true" : "false");
+
+    const btn = document.getElementById("zoom-button");
+    if (btn) {
+        btn.textContent = zoomed ? "🔎 Zoom Out" : "🔍 Zoom In";
+    }
+
+    tileSize = zoomed ? 80 : 60;
+    renderAll();
+}
+
+function applyZoomSetting() {
+    const stored = localStorage.getItem("zoom");
+    if (stored === "true") {
+        document.body.classList.add("zoomed");
+        tileSize = 80;
+    } else {
+        tileSize = 60;
+    }
+
+    const btn = document.getElementById("zoom-button");
+    if (btn) {
+        btn.textContent = document.body.classList.contains("zoomed") ? "🔎 Zoom Out" : "🔍 Zoom In";
+    }
+    renderAll();
+}
+
+
 function renderAll() {
     renderBoard();
     renderInventory();
@@ -280,3 +310,4 @@ function restartGame() {
 
 // Start
 restartGame();
+applyZoomSetting();

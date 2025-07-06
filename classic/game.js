@@ -230,4 +230,31 @@ function toggleZoom() {
   btn.textContent = document.body.classList.contains("zoomed") ? "🔎 Zoom Out" : "🔍 Zoom In";
 }
 
+function toggleZoom() {
+  const zoomed = document.body.classList.toggle("zoomed");
+  localStorage.setItem("zoom", zoomed ? "true" : "false");
+
+  const btn = document.getElementById("zoom-button");
+  if (btn) {
+    btn.textContent = zoomed ? "🔎 Zoom Out" : "🔍 Zoom In";
+  }
+
+  renderBoard(); // neu zeichnen mit aktualisierter Größe
+}
+
+function applyZoomSetting() {
+  const stored = localStorage.getItem("zoom");
+  if (stored === "true") {
+    document.body.classList.add("zoomed");
+  }
+
+  const btn = document.getElementById("zoom-button");
+  if (btn) {
+    btn.textContent = document.body.classList.contains("zoomed") ? "🔎 Zoom Out" : "🔍 Zoom In";
+  }
+
+  renderBoard(); // anwenden nach Initialisierung
+}
+
 initGame();
+applyZoomSetting();
