@@ -3,26 +3,25 @@
 
 <head>
     <meta charset="UTF-8" />
-    <title>Feeding Frenzy</title>
-    <link rel="stylesheet" href="style.css" />
+    <title>Feeding Frenzy – Game Selector</title>
+    <link rel="stylesheet" href="ui.css" />
+    <style>
+        .button-container {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            align-items: center;
+        }
+    </style>
 </head>
 
 <body>
     <h1>Feeding Frenzy</h1>
-
-    <div id="controls">
-        <button onclick="initGame()">🔄 Restart</button>
-        <button onclick="undoMove()">↩️ Undo (<span id='undo-count'>3</span> left)</button>
-        <button onclick="shuffleBoard()">🔀 Shuffle (<span id='shuffle-count'>2</span> left)</button>
+    <div class="button-container">
+        <a href="classic/game.html" class="button">Play Classic Version (v1.1.0)</a>
+        <a href="topdown/game.html" class="button">Play Top-Down Prototype (v0.0.1)</a>
     </div>
-
-    <div id="game-board"></div>
-    <div id="inventory"></div>
-    <div id="message"></div>
-
-    <div id="version">v1.0.1</div>
-
-    <script src="game.js"></script>
+    <div id="version">v2.0.0</div>
 </body>
 
 </html>
