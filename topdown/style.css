@@ -67,9 +67,10 @@ body {
 }
 
 #message {
-    margin-top: 15px;
-    font-size: 16px;
-    color: #ccc;
+    margin-top: 20px;
+    font-size: 18px;
+    text-align: center;
+    color: red;
 }
 
 body.zoomed .tile {

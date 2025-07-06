@@ -20,6 +20,10 @@
     position: relative;
 }
 
+.tile.covered {
+    cursor: not-allowed;
+}
+
 .tile.covered::after {
     content: "";
     position: absolute;
