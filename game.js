@@ -105,7 +105,12 @@ function pickTile(x) {
   if (!stack || stack.length === 0) return;
 
   const symbol = stack.pop();
-  undoHistory.push({ column: x, symbol });
+  undoHistory.push({
+    column: x,
+    symbol: symbol,
+    inventorySnapshot: [...inventoryList]
+  });
+
 
   inventoryList.push(symbol);
 
@@ -168,7 +173,7 @@ function undoMove() {
   const last = undoHistory.pop();
   if (!last) return;
 
-  inventoryList.pop();
+  inventoryList = [...last.inventorySnapshot];
   stackMap[last.column].push(last.symbol);
   usedUndos++;
 
