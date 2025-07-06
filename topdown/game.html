@@ -3,23 +3,28 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Feeding Frenzy – Top-Down</title>
+    <title>Feeding Frenzy – Top-Down v0.1.0</title>
     <link rel="stylesheet" href="../ui.css">
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-    <h1>Feeding Frenzy – Prototype</h1>
+    <h1>Feeding Frenzy – Top-Down (Turtle Layout)</h1>
+
+    <div id="controls">
+        <button onclick="restartGame()">🔄 Restart</button>
+        <button onclick="undoMove()" id="undo-button">↩️ Undo (<span id="undo-count">3</span>)</button>
+        <button onclick="shuffleBoard()" id="shuffle-button">🔀 Shuffle (<span id="shuffle-count">2</span>)</button>
+    </div>
 
     <div id="topdown-board"></div>
-    <div id="message">Prototype: Clickable logic not implemented yet.</div>
+    <div id="inventory"></div>
+    <div id="message"></div>
 
     <a href="../index.html" class="button">← Back to Start</a>
-
-    <div id="version">v0.0.1</div>
+    <div id="version">v0.1.0</div>
 
     <script src="game.js"></script>
 </body>
-
 
 </html>

@@ -1,29 +1,73 @@
+body {
+    background: #111;
+    color: #fff;
+    font-family: sans-serif;
+    margin: 0;
+    text-align: center;
+}
+
 #topdown-board {
-    background: #222;
-    margin: 20px auto;
-    border: 2px solid #666;
     position: relative;
-    width: 480px;
-    height: 360px;
+    width: 960px;
+    height: 960px;
+    margin: 20px auto;
+    background: #222;
+    border: 2px solid #666;
 }
 
 .tile {
+    position: absolute;
     width: 60px;
     height: 60px;
-    position: absolute;
-    background: #333;
-    border: 1px solid #777;
+    background: #444;
+    border: 1px solid #999;
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 32px;
     cursor: pointer;
     user-select: none;
+    box-shadow: 4px 4px 6px rgba(0, 0, 0, 0.6);
+    transition: transform 0.1s, top 0.1s, left 0.1s;
+}
+
+.tile:hover {
+    transform: scale(1.05);
+    z-index: 999;
+}
+
+.tile.covered {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+#inventory {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    gap: 10px;
+}
+
+.slot {
+    width: 60px;
+    height: 60px;
+    border: 2px solid #fff;
+    background: #111;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 32px;
+}
+
+#controls {
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
 }
 
 #message {
-    margin-top: 10px;
-    text-align: center;
+    margin-top: 15px;
     font-size: 16px;
     color: #ccc;
 }
