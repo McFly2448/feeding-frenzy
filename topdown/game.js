@@ -15,6 +15,7 @@ let inventorySlots = [];
 let undoStack = [];
 let undoCount = 3;
 let shuffleCount = 2;
+let gameOver = false;
 
 function generateTurtleLayout() {
     const layout = [];
@@ -148,6 +149,7 @@ function renderInventory() {
 
 function handleTileClick(tile) {
     if (!isTileFree(tile, allTiles)) return;
+    if (gameOver) return;
 
     saveUndoState();
     tile.removed = true;
@@ -158,6 +160,7 @@ function handleTileClick(tile) {
     // Direkt prüfen: Wenn jetzt 7 Items im Regal und nichts entfernt wurde → Game Over
     if (inventorySlots.length >= 7 && !matched) {
         message.textContent = "Game Over – Inventory full!";
+        gameOver = true;
         disableButtons();
     }
 
@@ -192,6 +195,7 @@ function checkGameState() {
 function disableButtons() {
     undoButton.disabled = true;
     shuffleButton.disabled = true;
+    gameOver = true;
 }
 
 function saveUndoState() {
@@ -199,7 +203,11 @@ function saveUndoState() {
     const copyTiles = allTiles.map(t => ({ ...t }));
     const copyInventory = [...inventorySlots];
     undoStack.push({ tiles: copyTiles, inventory: copyInventory });
-    if (undoStack.length > 10) undoStack.shift(); // Optional begrenzen
+    updateUndoButtonState();
+}
+
+function updateUndoButtonState() {
+    undoButton.disabled = undoStack.length === 0 || undoCount <= 0;
 }
 
 function undoMove() {
@@ -211,6 +219,7 @@ function undoMove() {
     undoCountEl.textContent = undoCount;
     renderAll();
     checkGameState();
+    updateUndoButtonState();
 }
 
 function shuffleBoard() {
@@ -225,8 +234,14 @@ function shuffleBoard() {
 
     shuffleCount--;
     shuffleCountEl.textContent = shuffleCount;
+
     renderAll();
     checkGameState();
+    updateShuffleButtonState();
+}
+
+function updateShuffleButtonState() {
+    shuffleButton.disabled = shuffleCount <= 0;
 }
 
 function renderAll() {
@@ -241,12 +256,13 @@ function restartGame() {
     undoStack = [];
     undoCount = 3;
     shuffleCount = 2;
+    gameOver = false;
     undoCountEl.textContent = undoCount;
     shuffleCountEl.textContent = shuffleCount;
-    undoButton.disabled = false;
-    shuffleButton.disabled = false;
     message.textContent = "";
     renderAll();
+    updateUndoButtonState();
+    shuffleButton.disabled = false;
 }
 
 // Start
