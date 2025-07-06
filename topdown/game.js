@@ -7,7 +7,8 @@ const undoButton = document.getElementById("undo-button");
 const shuffleButton = document.getElementById("shuffle-button");
 
 const TILE_SIZE = 60;
-const OFFSET = 5;
+const OFFSET_X = 4;
+const OFFSET_Y = 5;
 const SYMBOLS = ['🍎', '🍌', '🍇', '🍓', '🥝', '🍍', '🥑', '🍒', '🍉', '🍅', '🥕', '🌽', '🥦', '🍠', '🥜'];
 
 let allTiles = [];
@@ -35,8 +36,8 @@ function generateTurtleLayout() {
         for (let x = 0; x < size; x++) {
             for (let y = 0; y < size; y++) {
                 layout.push({
-                    x: offset + x + OFFSET,
-                    y: offset + y + OFFSET,
+                    x: offset + x + OFFSET_X,
+                    y: offset + y + OFFSET_Y,
                     z
                 });
             }
@@ -76,8 +77,8 @@ function generateTurtleLayout() {
 
     for (const { x, y } of extras) {
         layout.push({
-            x: x + OFFSET,
-            y: y + OFFSET,
+            x: x + OFFSET_X,
+            y: y + OFFSET_Y,
             z: 0
         });
     }
@@ -159,7 +160,7 @@ function handleTileClick(tile) {
 
     // Direkt prüfen: Wenn jetzt 7 Items im Regal und nichts entfernt wurde → Game Over
     if (inventorySlots.length >= 7 && !matched) {
-        message.textContent = "Game Over – Inventory full!";
+        message.textContent = "💀 Game Over! Shelf is full.";
         gameOver = true;
         disableButtons();
     }
@@ -187,7 +188,7 @@ function checkInventoryMatch() {
 
 function checkGameState() {
     if (allTiles.every(t => t.removed) && inventorySlots.length === 0) {
-        message.textContent = "You win!";
+        message.textContent = "🎉 You win! The board is clear.";
         disableButtons();
     }
 }
