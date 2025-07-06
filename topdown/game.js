@@ -7,7 +7,7 @@ const undoButton = document.getElementById("undo-button");
 const shuffleButton = document.getElementById("shuffle-button");
 
 const TILE_SIZE = 60;
-const OFFSET = 3;
+const OFFSET = 5;
 const SYMBOLS = ['🍎', '🍌', '🍇', '🍓', '🥝', '🍍', '🥑', '🍒', '🍉', '🍅', '🥕', '🌽', '🥦', '🍠', '🥜'];
 
 let allTiles = [];
@@ -18,6 +18,8 @@ let shuffleCount = 2;
 
 function generateTurtleLayout() {
     const layout = [];
+
+    // Die zentrale Pyramide (140 Karten)
     const layers = [
         { size: 7, offset: 0, z: 0 },
         { size: 6, offset: 0.5, z: 1 },
@@ -31,19 +33,52 @@ function generateTurtleLayout() {
     for (const { size, offset, z } of layers) {
         for (let x = 0; x < size; x++) {
             for (let y = 0; y < size; y++) {
-                layout.push({ x: offset + x + OFFSET, y: offset + y + OFFSET, z });
+                layout.push({
+                    x: offset + x + OFFSET,
+                    y: offset + y + OFFSET,
+                    z
+                });
             }
         }
     }
 
-    // 140 bisher, jetzt 40 Randkarten hinzufügen
-    while (layout.length < 180) {
-        const x = Math.floor(Math.random() * 13) + OFFSET - 3;
-        const y = Math.floor(Math.random() * 13) + OFFSET - 3;
-        const z = 0;
-        if (!layout.some(t => t.x === x && t.y === y && t.z === z)) {
-            layout.push({ x, y, z });
-        }
+    // Feste Zusatzkarten (Rand) – 40 Stück
+    const extras = [
+        // „Arme“ vorne links
+        { x: -1, y: -1 }, { x: -1, y: -2 }, { x: 0, y: -1 }, { x: 0, y: -2 },
+
+        // „Arme“ vorne rechts
+        { x: 6, y: -1 }, { x: 6, y: -2 }, { x: 7, y: -1 }, { x: 7, y: -2 },
+
+        // „Beine“ hinten links
+        { x: -1, y: 7 }, { x: -1, y: 8 }, { x: 0, y: 7 }, { x: 0, y: 8 },
+
+        // „Beine“ hinten rechts
+        { x: 6, y: 7 }, { x: 6, y: 8 }, { x: 7, y: 7 }, { x: 7, y: 8 },
+
+        // Oben (Kopf)
+        { x: 3, y: -1 }, { x: 2, y: -2 }, { x: 3, y: -2 }, { x: 4, y: -2 },
+        { x: 2, y: -3 }, { x: 3, y: -3 }, { x: 4, y: -3 },
+        { x: 2, y: -4 }, { x: 3, y: -4 }, { x: 4, y: -4 },
+
+        // Links
+        { x: -1, y: 1 }, { x: -1, y: 2 }, { x: -1, y: 3 }, { x: -1, y: 4 },
+        { x: -1, y: 5 },
+
+        // Rechts
+        { x: 7, y: 1 }, { x: 7, y: 2 }, { x: 7, y: 3 }, { x: 7, y: 4 },
+        { x: 7, y: 5 },
+
+        // Unten (Schwanz)
+        { x: 2, y: 7 }, { x: 3, y: 7 }, { x: 4, y: 7 }, { x: 3, y: 8 }
+    ];
+
+    for (const { x, y } of extras) {
+        layout.push({
+            x: x + OFFSET,
+            y: y + OFFSET,
+            z: 0
+        });
     }
 
     return layout;

@@ -37,7 +37,7 @@ body {
 }
 
 .tile.covered {
-    opacity: 0.4;
+    filter: brightness(0.4);
     cursor: not-allowed;
 }
 
