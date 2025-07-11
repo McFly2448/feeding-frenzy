@@ -1,4 +1,6 @@
-const symbols = ["🍎", "🍌", "🍇", "🍉", "🍓", "🥝", "🍍", "🍑", "🥥"];
+
+// Feeding Frenzy – Classic Game
+const symbolPool = ["🍎", "🍌", "🍇", "🍉", "🍓", "🥝", "🍍", "🍑", "🥥", "🍒", "🍅", "🥕", "🌽", "🥦", "🍠", "🥜", "🍆", "🫐"];
 const board = document.getElementById("game-board");
 const inventory = document.getElementById("inventory");
 const message = document.getElementById("message");
@@ -30,15 +32,7 @@ function initGame() {
   document.getElementById("shuffle-count").textContent = maxShuffles;
 
   const totalTiles = cols * rows;
-  const totalTriplets = Math.floor(totalTiles / 3);
-  const allTiles = [];
-
-  for (let i = 0; i < totalTriplets; i++) {
-    const symbol = symbols[i % symbols.length];
-    allTiles.push(symbol, symbol, symbol);
-  }
-
-  shuffleArray(allTiles);
+  const allTiles = getSymbolsForDifficulty(totalTiles);
 
   for (let x = 0; x < cols; x++) {
     stackMap[x] = [];
@@ -57,6 +51,33 @@ function initGame() {
   renderBoard();
   renderInventory();
   updateButtons();
+}
+
+function getSymbolsForDifficulty(totalTiles) {
+  const difficulty = document.getElementById("difficulty")?.value || "normal";
+  let symbols = [];
+  switch (difficulty) {
+    case "easy":
+      symbols = symbolPool.slice(0, 6); break;
+    case "hard":
+      symbols = symbolPool.slice(0, 12); break;
+    case "very-hard":
+      symbols = symbolPool.slice(0, 18); break;
+    case "normal":
+    default:
+      symbols = symbolPool.slice(0, 9); break;
+  }
+
+  const allTiles = [];
+  let i = 0;
+  while (allTiles.length + 3 <= totalTiles) {
+    const s = symbols[i % symbols.length];
+    allTiles.push(s, s, s);
+    i++;
+  }
+
+  shuffleArray(allTiles);
+  return allTiles;
 }
 
 function shuffleArray(arr) {
@@ -100,18 +121,11 @@ function renderInventory() {
 
 function pickTile(x) {
   if (gameOver) return;
-
   const stack = stackMap[x];
   if (!stack || stack.length === 0) return;
 
   const symbol = stack.pop();
-  undoHistory.push({
-    column: x,
-    symbol: symbol,
-    inventorySnapshot: [...inventoryList]
-  });
-
-
+  undoHistory.push({ column: x, symbol: symbol, inventorySnapshot: [...inventoryList] });
   inventoryList.push(symbol);
 
   const before = inventoryList.length;
@@ -128,7 +142,7 @@ function pickTile(x) {
   }
 
   if (inventoryList.length > maxInventory) {
-    inventoryList.pop(); // undo last push
+    inventoryList.pop();
     stack.push(symbol);
     undoHistory.pop();
     message.textContent = "❌ Shelf limit reached!";
@@ -176,7 +190,6 @@ function undoMove() {
   inventoryList = [...last.inventorySnapshot];
   stackMap[last.column].push(last.symbol);
   usedUndos++;
-
   document.getElementById("undo-count").textContent = maxUndos - usedUndos;
   message.textContent = "↩️ Move undone";
   renderBoard();
@@ -190,7 +203,6 @@ function shuffleBoard() {
     return;
   }
 
-  // Collect all tiles on the board
   const allRemaining = [];
   for (let col of stackMap) {
     while (col.length > 0) {
@@ -199,8 +211,6 @@ function shuffleBoard() {
   }
 
   shuffleArray(allRemaining);
-
-  // Re-distribute
   let index = 0;
   for (let x = 0; x < cols; x++) {
     stackMap[x] = [];
@@ -225,12 +235,6 @@ function updateButtons() {
 }
 
 function toggleZoom() {
-  document.body.classList.toggle("zoomed");
-  const btn = document.getElementById("zoom-button");
-  btn.textContent = document.body.classList.contains("zoomed") ? "🔎 Zoom Out" : "🔍 Zoom In";
-}
-
-function toggleZoom() {
   const zoomed = document.body.classList.toggle("zoomed");
   localStorage.setItem("zoom", zoomed ? "true" : "false");
 
@@ -239,7 +243,7 @@ function toggleZoom() {
     btn.textContent = zoomed ? "🔎 Zoom Out" : "🔍 Zoom In";
   }
 
-  renderBoard(); // neu zeichnen mit aktualisierter Größe
+  renderBoard();
 }
 
 function applyZoomSetting() {
@@ -253,7 +257,7 @@ function applyZoomSetting() {
     btn.textContent = document.body.classList.contains("zoomed") ? "🔎 Zoom Out" : "🔍 Zoom In";
   }
 
-  renderBoard(); // anwenden nach Initialisierung
+  renderBoard();
 }
 
 initGame();

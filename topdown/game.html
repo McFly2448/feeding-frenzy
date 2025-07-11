@@ -3,13 +3,23 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Feeding Frenzy – Top-Down v0.1.0</title>
+    <title>Feeding Frenzy – Top-Down v1.1.0</title>
     <link rel="stylesheet" href="../ui.css">
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
     <h1>Feeding Frenzy – Top-Down (Turtle Layout)</h1>
+
+    <div id="difficulty-select">
+        Difficulty:
+        <select id="difficulty" onchange="restartGame()">
+            <option value="easy">Easy</option>
+            <option value="normal" selected>Normal</option>
+            <option value="hard">Hard</option>
+            <option value="very-hard">Very Hard</option>
+        </select>
+    </div>
 
     <div id="controls">
         <button onclick="restartGame()">🔄 Restart</button>
@@ -23,7 +33,7 @@
     <div id="message"></div>
 
     <a href="../index.html" class="button-large">← Back to Start</a>
-    <div id="version">v1.0.5</div>
+    <div id="version">v1.1.0</div>
 
     <script src="game.js"></script>
 </body>

@@ -10,7 +10,15 @@
 
 <body>
     <h1>Feeding Frenzy</h1>
-
+    <div id="difficulty-select">
+        Difficulty:
+        <select id="difficulty" onchange="initGame()">
+            <option value="easy">Easy</option>
+            <option value="normal" selected>Normal</option>
+            <option value="hard">Hard</option>
+            <option value="very-hard">Very Hard</option>
+        </select>
+    </div>
     <div id="controls">
         <button onclick="initGame()">🔄 Restart</button>
         <button onclick="undoMove()">↩️ Undo (<span id='undo-count'>3</span> left)</button>
@@ -23,7 +31,7 @@
     <div id="message"></div>
 
     <a href="../index.html" class="button-large">← Back to Start</a>
-    <div id="version">v1.1.3</div>
+    <div id="version">v1.2.0</div>
 
     <script src="game.js"></script>
 </body>

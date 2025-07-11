@@ -23,3 +23,6 @@ A browser-based tile matching mini-game inspired by the "Feeding Frenzy" event f
    ```bash
    git clone https://github.com/YOUR-USERNAME/feeding-frenzy.git
    cd feeding-frenzy
+   python3 server.py
+   ``` 
+2. Open `http://localhost:8080` in your browser
