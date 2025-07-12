@@ -7,11 +7,16 @@ const undoButton = document.getElementById("undo-button");
 const shuffleButton = document.getElementById("shuffle-button");
 const difficultySelect = document.getElementById("difficulty");
 
-const OFFSET_X = 4;
-const OFFSET_Y = 5;
+const PADDING = 20;
+const OFFSET_X = 1;
+const OFFSET_Y = 4;
 const SYMBOLS = [
-    '🍎', '🍌', '🍇', '🍓', '🥝', '🍍', '🥑', '🍒', '🍉',
-    '🍅', '🥕', '🌽', '🥦', '🍠', '🥜', '🍆', '🫐', '🍋'
+    '🍎', '🍌', '🍇', '🍓', '🥝', '🍍', '🥑', '🍒', '🍉', '🍅',
+    '🥕', '🌽', '🥦', '🍠', '🥜', '🍆', '🫐', '🍋', '🍕', '🍔',
+    '🍟', '🌭', '🍿', '🧂', '🥓', '🥚', '🍳', '🧇', '🥞', '🧈',
+    '🍞', '🥐', '🥨', '🥯', '🥖', '🫓', '🧀', '🥗', '🥙', '🥪',
+    '🌮', '🌯', '🫔', '🥫', '🍖', '🍗', '🥩', '🥟', '🥠', '🥡',
+    '🍱', '🍘', '🍙', '🍚', '🍛', '🍜', '🦪', '🍣', '🍤', '🍥'
 ];
 
 let tileSize = 60;
@@ -68,9 +73,10 @@ function assignSymbols(layout) {
     let symbolCount = 9;
 
     switch (difficulty) {
-        case "easy": symbolCount = 6; break;
-        case "hard": symbolCount = 12; break;
-        case "very-hard": symbolCount = 18; break;
+        case "easy": symbolCount = 12; break;
+        case "hard": symbolCount = 18; break;
+        case "very-hard": symbolCount = 30; break;
+        case "impossible": symbolCount = 60; break;
     }
 
     const pool = SYMBOLS.slice(0, symbolCount);
@@ -117,8 +123,8 @@ function renderBoard() {
 
         const div = document.createElement("div");
         div.className = "tile";
-        div.style.left = `${tile.x * tileSize + tile.z * 4}px`;
-        div.style.top = `${tile.y * tileSize - tile.z * 4}px`;
+        div.style.left = `${tile.x * tileSize + tile.z * 4 + PADDING}px`;
+        div.style.top = `${tile.y * tileSize - tile.z * 4 + PADDING}px`;
         div.style.zIndex = 100 + tile.z;
         div.textContent = tile.symbol;
 

@@ -9,8 +9,8 @@ body {
 
 #topdown-board {
     position: relative;
-    width: 900px;
-    height: 900px;
+    width: 580px;
+    height: 820px;
     margin: 20px auto;
     background: #222;
     border: 2px solid #666;
@@ -98,8 +98,8 @@ body.zoomed .slot {
 }
 
 body.zoomed #topdown-board {
-    width: 1200px;
-    height: 1200px;
+    width: 760px;
+    height: 1080px;
 }
 
 body.zoomed button {

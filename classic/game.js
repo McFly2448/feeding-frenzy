@@ -1,6 +1,8 @@
 
 // Feeding Frenzy – Classic Game
-const symbolPool = ["🍎", "🍌", "🍇", "🍉", "🍓", "🥝", "🍍", "🍑", "🥥", "🍒", "🍅", "🥕", "🌽", "🥦", "🍠", "🥜", "🍆", "🫐"];
+const symbolPool = ["🍎", "🍌", "🍇", "🍉", "🍓", "🥝", "🍍", "🍑", "🥥", "🍒", 
+                    "🍅", "🥕", "🌽", "🥦", "🍠", "🥜", "🍆", "🫐", "🍕", "🍔", 
+                    "🍟", "🌭", "🍿", "🥓"];
 const board = document.getElementById("game-board");
 const inventory = document.getElementById("inventory");
 const message = document.getElementById("message");
@@ -63,6 +65,8 @@ function getSymbolsForDifficulty(totalTiles) {
       symbols = symbolPool.slice(0, 12); break;
     case "very-hard":
       symbols = symbolPool.slice(0, 18); break;
+    case "impossible":
+      symbols = symbolPool.slice(0, 24); break;
     case "normal":
     default:
       symbols = symbolPool.slice(0, 9); break;
